@@ -1,33 +1,36 @@
-import aulas.aula4.Conta;
 
+import desafio.ContaBanco;
+
+import java.util.Scanner;
+
+/**
+ * Classe de testes do programa.
+ * Contém o método main para execução.
+ *
+ * @author gabrielbarruzi
+ * @version 1.0
+ * @since 18/02/2025
+ */
 public class Main {
-    public static void main(String[] args) {
+        public static void main(String[] args) {
+            Scanner leitor = new Scanner(System.in);
+            ContaBanco conta = new ContaBanco();
+            conta.saldo = 237.48;
+            System.out.println("Olá, cliente!\n" +
+                    "Por favor, digite seu número da conta");
+            conta.numero = leitor.nextInt();
+            System.out.println("Agora, sua agência:");
+            leitor.nextLine();
+            conta.agencia = leitor.next();
+            System.out.println("Seu nome:");
+            leitor.nextLine();
+            conta.nomeCliente = leitor.nextLine();
 
-        //Testando a classe Carro
-//        Carro carro = new Carro("Fusca", "Azul", "ABC-1234", false);
-//        System.out.println(carro.ligarOuDesligar());
-//        System.out.println(carro.ligarOuDesligar());
-
-        //Testando a classe SmartTV
-//        SmartTV tv = new SmartTV("SONY", 45, 90, 29, false);
-//        System.out.println(tv);
-//        tv.ligarDesligar();
-//        System.out.println(tv);
-//        tv.aumentarVolume();
-//        tv.aumentarVolume();
-//        System.out.println(tv);
-//        tv.mudarCanal(26);
-//        System.out.println(tv);
-
-//        Testando classe Conta
-        Conta conta = new Conta("Gabriel", 190.0);
-        System.out.println(conta);
-        conta.depositar(19);
-        System.out.println(conta);
-        conta.sacar(220);
+            System.out.println("Olá, "+conta.nomeCliente+", obrigado por criar uma conta em nosso banco. Sua agência é " +
+                    conta.agencia+", conta "+conta.numero+", e seu saldo de R$ "+conta.saldo+" já está disponível para saque!");
 
 
 
 
-    }
-}
+    }}
+
