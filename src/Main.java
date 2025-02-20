@@ -1,5 +1,5 @@
 
-import desafio.ContaBanco;
+import desafios.desafio1.ContaBanco;
 
 import java.util.Scanner;
 

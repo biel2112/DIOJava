@@ -1,4 +1,4 @@
-package desafio;
+package desafios.desafio1;
 
 public class ContaBanco {
     public int numero;
