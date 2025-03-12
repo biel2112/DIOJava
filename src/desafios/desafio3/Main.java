@@ -10,7 +10,6 @@ public class Main {
         iphone.ligar(contato);
         iphone.tocar(musica);
         iphone.selecionarMusica(musica);
-
     }
 
 }
