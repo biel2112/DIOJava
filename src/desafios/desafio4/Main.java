@@ -27,7 +27,7 @@ public class Main {
         contaPoupanca.rendimentoMensal();
         contaPoupanca.imprimir();
 
-        contaPoupanca.transferir(contaCorrente,100.0, contaPoupanca);
+        contaPoupanca.transferir(100.0, contaCorrente);
         contaPoupanca.imprimir();
         contaCorrente.imprimir();
     }

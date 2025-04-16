@@ -33,8 +33,8 @@ public abstract class Conta implements Imprimivel{
         }
     }
 
-    public void transferir(Conta conta1, Double valor, Conta conta2){
-        conta1.saldo -= valor;
+    public void transferir(Double valor, Conta conta2){
+        this.saldo -= valor;
         conta2.saldo += valor;
     }
 
