@@ -33,6 +33,11 @@ public abstract class Conta implements Imprimivel{
         }
     }
 
+    public void transferir(Conta conta1, Double valor, Conta conta2){
+        conta1.saldo -= valor;
+        conta2.saldo += valor;
+    }
+
     @Override
     public void imprimir(){
         System.out.println("Número: "+numero

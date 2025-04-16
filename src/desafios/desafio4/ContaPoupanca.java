@@ -20,6 +20,6 @@ public class ContaPoupanca extends Conta{
 
     @Override
     public void imprimir() {
-        System.out.println("Conta Corrente: " + numero + " | Saldo: R$" + saldo);
+        System.out.println("Conta Poupança: " + numero + " | Saldo: R$" + saldo);
     }
 }
