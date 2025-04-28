@@ -1,6 +1,7 @@
 package desafios.desafioSudoku;
 
 import desafios.desafioSudoku.model.Board;
+import desafios.desafioSudoku.model.GameStatusEnum;
 import desafios.desafioSudoku.model.Space;
 
 import java.util.ArrayList;
@@ -9,6 +10,7 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.stream.Stream;
 
+import static desafios.desafioSudoku.BoardTemplate.BOARD_TEMPLATE;
 import static java.util.Objects.nonNull;
 import static java.util.Objects.isNull;
 import static java.util.stream.Collectors.toMap;
@@ -106,26 +108,82 @@ public class Main {
 
         System.out.println("Informe a coluna que deseja em que o número será inserido:");
         var row = runUntilGetValidNumber(0,8);
-        System.out.printf("Informe o número que vai entrar na posição [%s,%s]\n", col, row);
-        var value = runUntilGetValidNumber(1, 9);
         if (!board.clearValue(col, row)){
             System.out.printf("A posição [%s,%s] tem um valor fixo!\n", col, row);
         }
     }
 
-    private static void finishGame() {
-    }
+    private static void showCurrentGame() {
+        if(isNull(board)){
+            System.out.println("O jogo ainda não foi iniciado!");
+            return;
+        }
 
-    private static void clearGame() {
-        
+        var args = new Object[81];
+        var argsPos = 0;
+        var colSize = BOARD_LIMIT;
+        for(int i = 0; i < BOARD_LIMIT; i++){
+            for (var col: board.getSpaces()){
+                args[argsPos ++] = " " + ((isNull(col.get(i).getActual())) ? " ":col.get(i).getActual());
+            }
+        }
+
+        System.out.println("Seu jogo se encontra da seguinte maneira:\n\n");
+        System.out.printf((BOARD_TEMPLATE) + "%n" + args);
     }
 
     private static void showGameStatus() {
-        
+        if(isNull(board)){
+            System.out.println("O jogo ainda não foi iniciado!");
+            return;
+        }
+
+        System.out.printf("O jogo atualmente se encontra %s\n", board.getStatus());
+
+        if (board.hasErrors()){
+            System.out.println("O jogo contém erros!");
+        } else{
+            System.out.println("O jogo não contém erros!");
+        }
     }
 
-    private static void showCurrentGame() {
-        
+    private static void clearGame() {
+
+        if(isNull(board)){
+            System.out.println("O jogo ainda não foi iniciado!");
+            return;
+        }
+
+        System.out.println("Tem certeza que deseja limpar seu jogo?");
+        var confirm = scanner.next();
+
+        while (!confirm.equalsIgnoreCase("sim") && !confirm.equalsIgnoreCase("não")){
+            System.out.println("Informe 'Sim' ou 'Não'");
+            confirm = scanner.next();
+        }
+
+        if (confirm.equalsIgnoreCase("sim")){
+            board.reset();
+        }
+
+    }
+
+    private static void finishGame() {
+
+        if(isNull(board)){
+            System.out.println("O jogo ainda não foi iniciado!");
+            return;
+        }
+
+        if (board.gameIsFinished()){
+            System.out.println("Parabéns, você concluiu o jogo!");
+            showCurrentGame();
+            board = null;
+        } else if(board.hasErrors()){
+            System.out.println("Seu jogo contém erros! Verifique o seu board e ajuste-o!");
+        } else {
+            System.out.println("Seu jogo tem algum espaço a ser preenchido!");
+        }
     }
 
     private static int runUntilGetValidNumber(final int min, final int max){
